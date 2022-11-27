@@ -1,0 +1,19 @@
+header {
+  background-color: #eb4141;
+  color: #ffffff;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  a {
+    font-size: 30px;
+    font-weight: 800;
+    margin-right: 10px;
+  }
+  button {
+    border: 1px solid currentColor;
+    padding: 5px;
+  }
+  button:hover, button:focus {
+    color: #dddbdb;
+  }
+}
