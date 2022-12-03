@@ -1,5 +1,7 @@
 <aside>
   <ul>
-    <li *ngFor="let todo of todoList">{{ todo.title }}</li>
+    <li *ngFor="let todo of todoList" (click)="onClick(todo)">
+      {{ todo.title }}
+    </li>
   </ul>
 </aside>

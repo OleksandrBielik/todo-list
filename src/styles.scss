@@ -19,6 +19,9 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+* {
+  box-sizing: border-box;
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -64,4 +67,12 @@ button {
 
 textarea {
   resize: none;
+}
+
+div {
+  width: 100%;
+}
+
+label {
+  display: inline-block;
 }

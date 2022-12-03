@@ -13,4 +13,8 @@ export class SideMenuComponent implements OnInit {
   ngOnInit(): void {
     this.todoList = this.todoListService.todoList;
   }
+
+  onClick(todo: Todo) {
+    this.todoListService.setCurrentTodo(todo);
+  }
 }

@@ -1,14 +1,68 @@
 <div class="overlay" (click)="onClose()"></div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <button type="button" class="close-btn" (click)="onClose()">X</button>
-  <label for="title">Title</label>
-  <input type="text" id="title" name="title" formControlName="title" />
-  <label for="description">Description</label>
-  <textarea
-    id="description"
-    name="description"
-    rows="4"
-    formControlName="description"
-  ></textarea>
-  <button type="submit" class="submit-btn">Add todo</button>
+  <div class="title">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" formControlName="title" />
+    <ul
+      class="error"
+      *ngIf="getControl('title').invalid && getControl('title').touched"
+    >
+      <li *ngIf="getError('title', 'required')">The field is required</li>
+      <li *ngIf="getError('title', 'minlength')">
+        Title's min length should be 3
+      </li>
+      <li *ngIf="getError('title', 'maxlength')">
+        Title's max length should be 15
+      </li>
+    </ul>
+  </div>
+  <div class="description">
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      name="description"
+      rows="4"
+      formControlName="description"
+    ></textarea>
+  </div>
+  <div class="tasks">
+    <div class="flex">
+      <h2>Your tasks</h2>
+      <button type="button" (click)="addTask()" [disabled]="!isValidLength()">
+        Add task
+      </button>
+    </div>
+    <ul class="tasks-container" formGroupName="tasks">
+      <li class="task" *ngFor="let control of tasks.controls; let i = index">
+        <label [for]="i">Task #{{ i + 1 }}</label>
+        <div class="flex">
+          <input type="text" [id]="i" [formControlName]="i + ''" />
+          <button type="button" class="remove-btn" (click)="onRemove(i)">
+            Remove
+          </button>
+        </div>
+        <ul
+          class="error"
+          *ngIf="
+            getControl('tasks').get(i + '')?.invalid &&
+            getControl('tasks').get(i + '')?.touched
+          "
+        >
+          <li *ngIf="getFormArrayError('tasks', i + '', 'required')">
+            The field is required
+          </li>
+          <li *ngIf="getFormArrayError('tasks', i + '', 'minlength')">
+            Title's min length should be 3
+          </li>
+          <li *ngIf="getFormArrayError('tasks', i + '', 'maxlength')">
+            Title's max length should be 15
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <button type="submit" class="submit-btn" [disabled]="form.invalid">
+    Add todo
+  </button>
 </form>

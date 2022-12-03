@@ -1,6 +1,10 @@
 header {
-  background-color: #eb4141;
-  color: #ffffff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #EAE7DC;
+  color: #E85A4F;
   padding: 10px 15px;
   display: flex;
   align-items: center;
@@ -12,8 +16,5 @@ header {
   button {
     border: 1px solid currentColor;
     padding: 5px;
-  }
-  button:hover, button:focus {
-    color: #dddbdb;
   }
 }
