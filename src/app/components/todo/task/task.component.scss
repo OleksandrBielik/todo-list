@@ -1,0 +1,10 @@
+label {
+  display: flex;
+  cursor: pointer;
+}
+label > input {
+  margin-right: 5px;
+}
+input:checked + span {
+  text-decoration: line-through;
+}

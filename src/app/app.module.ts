@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TodoComponent } from './components/todo/todo.component';
+import { TaskComponent } from './components/todo/task/task.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { TodoComponent } from './components/todo/todo.component';
     HeaderComponent,
     ModalComponent,
     TodoComponent,
+    TaskComponent,
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule],
   providers: [],

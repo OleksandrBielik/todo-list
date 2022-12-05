@@ -6,7 +6,7 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { TodoListService } from 'src/app/services/todo-list.service';
+import { Task, TodoListService } from 'src/app/services/todo-list.service';
 
 @Component({
   selector: 'app-modal',
@@ -26,11 +26,12 @@ export class ModalComponent implements OnInit {
   }
 
   onSubmit() {
+    const tasks = this.setTasks(this.form.value.tasks);
     this.todoListService.addTodo({
       ...this.form.value,
+      tasks,
       id: String(Math.random()),
     });
-    console.log(this.form.get('tasks')?.get('0'));
   }
 
   addTask(): void {
@@ -40,7 +41,6 @@ export class ModalComponent implements OnInit {
       Validators.required,
     ]);
     this.tasks.push(control);
-    console.log(this.tasks.length);
   }
 
   isValidLength(): boolean {
@@ -49,6 +49,19 @@ export class ModalComponent implements OnInit {
 
   get tasks(): FormArray {
     return this.form.get('tasks') as FormArray;
+  }
+
+  setTasks(formTasks: string[]): Task[] {
+    const temp: string[] = Object.values(formTasks);
+    const tasks = temp.map((item) => {
+      const temp: Task = {
+        title: item,
+        id: String(Math.random()),
+        done: false,
+      };
+      return temp;
+    });
+    return tasks;
   }
 
   getControl(control: string): FormControl {

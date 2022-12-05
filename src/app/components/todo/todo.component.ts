@@ -4,7 +4,11 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-import { Todo, TodoListService } from 'src/app/services/todo-list.service';
+import {
+  Task,
+  Todo,
+  TodoListService,
+} from 'src/app/services/todo-list.service';
 
 @Component({
   selector: 'app-todo',
@@ -18,11 +22,19 @@ export class TodoComponent implements OnInit {
     private cd: ChangeDetectorRef
   ) {}
   currentTodo?: Todo;
+
+  editTodo(task: Task): void {
+    const tasks = this.currentTodo?.tasks?.filter(
+      (item) => item.id !== task.id
+    );
+    tasks?.push(task);
+    console.log({ ...this.currentTodo, tasks });
+    this.todoListService.editTodo({ ...this.currentTodo, tasks });
+  }
   ngOnInit(): void {
     this.todoListService.currentTodo.subscribe((value?: Todo) => {
       this.currentTodo = value;
       this.cd.markForCheck();
-      console.log(this.currentTodo);
     });
   }
 }

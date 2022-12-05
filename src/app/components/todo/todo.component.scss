@@ -1,7 +1,26 @@
 .todo {
-  margin-left: 200px;
   width: 100%;
+  padding: 15px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
+  .todo-title {
+    font-size: 30px;
+    margin-bottom: 15px;
+  }
+  .todo-description {
+    max-width: 50%;
+    margin-bottom: 15px;
+  }
 }
+
+:host(app-todo) {
+  width: 100%;
+}
+
+.tasks {
+  li:not(:last-child) {
+    margin-bottom: 5px;
+  }
+}
+
