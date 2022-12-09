@@ -24,11 +24,14 @@ export class TodoComponent implements OnInit {
   currentTodo?: Todo;
 
   editTodo(task: Task): void {
-    const tasks = this.currentTodo?.tasks?.filter(
-      (item) => item.id !== task.id
-    );
-    tasks?.push(task);
-    console.log({ ...this.currentTodo, tasks });
+    if (!this.currentTodo) {
+      return;
+    }
+    if (!this.currentTodo.tasks) {
+      return;
+    }
+    const tasks = this.currentTodo.tasks.filter((item) => item.id !== task.id);
+    tasks.push(task);
     this.todoListService.editTodo({ ...this.currentTodo, tasks });
   }
   ngOnInit(): void {

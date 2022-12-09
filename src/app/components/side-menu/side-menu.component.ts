@@ -11,7 +11,7 @@ export class SideMenuComponent implements OnInit {
   todoList!: Todo[];
 
   ngOnInit(): void {
-    this.todoList = this.todoListService.todoList;
+    this.todoListService.observable.subscribe((val) => (this.todoList = val));
   }
 
   onClick(todo: Todo) {

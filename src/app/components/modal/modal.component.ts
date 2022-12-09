@@ -26,19 +26,21 @@ export class ModalComponent implements OnInit {
   }
 
   onSubmit() {
-    const tasks = this.setTasks(this.form.value.tasks);
+    const tasks = this.setTasks(this.form.value.tasks).filter(
+      (item) => item.title
+    );
     this.todoListService.addTodo({
       ...this.form.value,
       tasks,
       id: String(Math.random()),
     });
+    this.onClose();
   }
 
   addTask(): void {
     const control = new FormControl('', [
       Validators.maxLength(15),
       Validators.minLength(3),
-      Validators.required,
     ]);
     this.tasks.push(control);
   }

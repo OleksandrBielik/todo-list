@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 
 export interface Todo {
-  id?: string;
-  title?: string;
+  id: string;
+  title: string;
   description?: string;
   tasks?: Task[];
 }
@@ -19,6 +19,7 @@ export interface Task {
 })
 export class TodoListService {
   todoList: Todo[] = [];
+  observable = of(this.todoList);
   currentTodo = new Subject<Todo>();
 
   addTodo(todo: Todo): void {
@@ -32,9 +33,7 @@ export class TodoListService {
   }
 
   editTodo(todo: Todo) {
-    const temp = this.todoList.filter((item) => item.id !== todo.id);
-    temp.push(todo);
-    this.todoList = temp;
+    this.todoList.filter((item) => item.id !== todo.id).push(todo);
     console.log(this.todoList);
   }
 }
